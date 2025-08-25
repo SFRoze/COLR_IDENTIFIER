@@ -4,7 +4,7 @@
 
 COLR Identifier is a modern, feature-rich color picker tool designed for designers, developers, and digital artists. Pick colors from anywhere on your screen with real-time cursor tracking, work with multiple color spaces, and manage your color workflow efficiently.
 
-![COLR Identifier Interface](https://via.placeholder.com/800x500/0a0a0a/00ff00?text=COLR+Identifier+Interface)
+![COLR Identifier Interface](https://img.shields.io/badge/COLR%20Identifier-Interface%20Preview-brightgreen?style=for-the-badge&logo=electron&logoColor=white)
 
 ## ✨ Features
 
