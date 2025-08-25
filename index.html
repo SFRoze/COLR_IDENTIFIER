@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COLR_Identify</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="tui-container">
+        <!-- TUI24 Header Bar -->
+        <div class="tui-header">
+            <div class="tui-title-bar">
+                <span class="tui-prefix">[</span>
+                <span class="tui-title">COLR_IDENTIFY</span>
+                <span class="tui-suffix">]</span>
+                <div class="tui-window-controls">
+                    <button class="tui-btn minimize">─</button>
+                    <button class="tui-btn maximize">□</button>
+                    <button class="tui-btn close">×</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- TUI24 Navigation -->
+        <div class="tui-nav">
+            <div class="tui-nav-item active" data-tab="picker">
+                <span class="tui-bracket">[</span>PICKER<span class="tui-bracket">]</span>
+            </div>
+            <div class="tui-nav-item" data-tab="favorites">
+                <span class="tui-bracket">[</span>FAVS<span class="tui-bracket">]</span>
+            </div>
+            <div class="tui-nav-item" data-tab="history">
+                <span class="tui-bracket">[</span>HIST<span class="tui-bracket">]</span>
+            </div>
+        </div>
+
+        <!-- TUI24 Main Content -->
+        <div class="tui-main">
+            <!-- Tab: Color Picker -->
+            <div class="tui-tab active" id="tab-picker">
+                <!-- TUI Status Bar -->
+                <div class="tui-status">
+                    <span class="tui-status-item">
+                        <span class="tui-label">HEX:</span>
+                        <span class="tui-value" id="coordinates">6A4C93</span>
+                    </span>
+                    <span class="tui-status-item">
+                        <span class="tui-label">POS:</span>
+                        <span class="tui-value" id="cursor-pos">[0,0]</span>
+                    </span>
+                </div>
+                
+                <!-- TUI Color Display Box -->
+                <div class="tui-section">
+                    <div class="tui-section-title">┌─ COLOR PREVIEW ─┐</div>
+                    <div class="tui-color-box">
+                        <div class="tui-color-sample" id="colorPreview"></div>
+                        <div class="tui-crosshair">
+                            <div class="tui-crosshair-v"></div>
+                            <div class="tui-crosshair-h"></div>
+                        </div>
+                    </div>
+                    <div class="tui-section-footer">└─────────────────┘</div>
+                </div>
+
+                <!-- TUI Control Panel -->
+                <div class="tui-section">
+                    <div class="tui-section-title">┌─ CONTROLS ─┐</div>
+                    <div class="tui-controls">
+                        <div class="tui-control-row">
+                            <select class="tui-select" id="colorFormat">
+                                <option value="HEX">HEX</option>
+                                <option value="RGB">RGB</option>
+                                <option value="HSV">HSV</option>
+                                <option value="HSL">HSL</option>
+                            </select>
+                            <input type="text" class="tui-input" id="colorInput" placeholder="#6A4C93">
+                            <button class="tui-button" id="copyBtn">[COPY] <span class="tui-keybind">(C)</span></button>
+                        </div>
+                        
+                        <!-- Color Space Selection -->
+                        <div class="tui-radio-group">
+                            <label class="tui-radio">
+                                <input type="radio" id="rgb" name="colorSpace" value="RGB" checked>
+                                <span class="tui-radio-label">[RGB]</span>
+                            </label>
+                            <label class="tui-radio">
+                                <input type="radio" id="hsv" name="colorSpace" value="HSV">
+                                <span class="tui-radio-label">[HSV]</span>
+                            </label>
+                            <label class="tui-radio">
+                                <input type="radio" id="hsl" name="colorSpace" value="HSL">
+                                <span class="tui-radio-label">[HSL]</span>
+                            </label>
+                        </div>
+                        
+                        <!-- Sliders -->
+                        <div class="tui-sliders">
+                            <div class="tui-slider-row">
+                                <span class="tui-slider-label">R:</span>
+                                <input type="range" id="component1" class="tui-slider" min="0" max="255" value="106">
+                                <span class="tui-slider-value" id="component1Value">106</span>
+                            </div>
+                            <div class="tui-slider-row">
+                                <span class="tui-slider-label">G:</span>
+                                <input type="range" id="component2" class="tui-slider" min="0" max="255" value="76">
+                                <span class="tui-slider-value" id="component2Value">76</span>
+                            </div>
+                            <div class="tui-slider-row">
+                                <span class="tui-slider-label">B:</span>
+                                <input type="range" id="component3" class="tui-slider" min="0" max="255" value="147">
+                                <span class="tui-slider-value" id="component3Value">147</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tui-section-footer">└─────────────┘</div>
+                </div>
+            </div>
+            
+            <!-- Tab: Favorites -->
+            <div class="tui-tab" id="tab-favorites">
+                <div class="tui-section">
+                    <div class="tui-section-title">┌─ SAVED COLORS ─┐</div>
+                    <div class="tui-favorites" id="favoritesList">
+                        <!-- Favorites will be populated here -->
+                    </div>
+                    <div class="tui-section-footer">└────────────────┘</div>
+                </div>
+            </div>
+            
+            <!-- Tab: History -->
+            <div class="tui-tab" id="tab-history">
+                <div class="tui-section">
+                    <div class="tui-section-title">┌─ COLOR HISTORY ─┐</div>
+                    <div class="tui-history" id="historyList">
+                        <!-- History will be populated here -->
+                    </div>
+                    <div class="tui-section-footer">└─────────────────┘</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TUI Action Bar -->
+        <div class="tui-actions">
+            <button class="tui-action-btn" id="startColorPicking">
+                <span class="tui-bracket">[</span>START PICKING<span class="tui-bracket">]</span> <span class="tui-keybind">(CTRL+SHIFT+C)</span>
+            </button>
+            <button class="tui-action-btn" id="saveToFavorites">
+                <span class="tui-bracket">[</span>SAVE FAV<span class="tui-bracket">]</span> <span class="tui-keybind">(F)</span>
+            </button>
+        </div>
+    </div>
+
+    <script src="renderer.js"></script>
+</body>
+</html>
